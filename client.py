@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
 import urllib.request, json
-from circuitbreaker import circuit
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
@@ -19,7 +18,6 @@ def igv():
 
     return jsonify(igv=tax), 200
 
-@circuit(failure_threshold=5, recovery_timeout=10, name='get_tax_from_api')
 def get_tax_from_api():
     url = "http://127.0.0.1:5000/tax"
 
